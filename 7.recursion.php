@@ -67,3 +67,33 @@ print_r($facArray);
 $sqrtArray = array_map('sqrt', $numbersArray);
 echo 'Массив квадратных корней' . PHP_EOL;
 print_r($sqrtArray);
+
+
+// Функция checkPassword будет использовать значение переменной $password, установленное до момента
+// инициализации функции checkPassword. Т.е., если значение переменной менялось после инициализации
+// функции, то это НЕ будет учитываться. Если мы хотим чтобы учитывались изменения переменной и после
+// инициализации функции, то мы должны передавать эту переменную по ссылке &
+$password = 'password';
+
+$checkPassword = function($userPassword) use (&$password) {
+    return $userPassword === $password;
+};
+
+if($checkPassword('password')) {
+    echo 'Пароль верен' . PHP_EOL;
+} else {
+    echo 'Пароль не верен' . PHP_EOL;
+}
+
+
+$password = 'test';
+
+do {
+    $userPassword = readline('Enter password: ');
+    if($checkPassword($userPassword)) {
+        echo 'Password is valid';
+        break;
+    }else {
+        echo 'Wrong password' . PHP_EOL;
+    }
+} while (true);
