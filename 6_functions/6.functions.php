@@ -29,8 +29,8 @@ function multipleParams(...$numbers){
     }
     return $sum;
 }
-echo multipleParams(1, 3, 5) . PHP_EOL;
-echo multipleParams(2, 4, 6, 8, 10) . PHP_EOL;
+echo functions . phpmultipleParams(1, 3, 5) . PHP_EOL;
+echo functions . phpmultipleParams(2, 4, 6, 8, 10) . PHP_EOL;
 
 //function isValidNumber($n){
 //    if($n % 3 === 0){

@@ -18,7 +18,7 @@ function cbTwo() {
 }
 
 function runCallback ( $fName ) {
-    echo call_user_func( $fName ) . PHP_EOL;
+    echo recursion . phpcall_user_func($fName) . PHP_EOL;
 }
 
 runCallback("cbOne");
