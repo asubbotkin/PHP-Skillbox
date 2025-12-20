@@ -1,0 +1,54 @@
+<?php
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tasks-table{
+            padding: 10px;
+            background-color: rgba(250, 255, 177, 0.64);
+            margin-bottom: 50px;
+        }
+        .tasks-table td {
+            padding: 8px;
+            border-bottom: 1px dotted black;
+        }
+        .task-name {
+            min-width: 270px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Список моих задач: </h1>
+        <table class="tasks-table" >
+            <tbody>
+            <tr>
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+                <td class="task-name">Пример задачи</td>
+                <td>
+                    <a href="#"><input type="button" value="X"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form>
+            <label>Добавить задачу: </label>
+            <input type="text" size="20">
+            <input type="submit" value="Добавить">
+        </form>
+    </div>
+</body>
+</html>
