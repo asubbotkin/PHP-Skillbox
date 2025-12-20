@@ -103,27 +103,29 @@ if(isset($_GET['change_status']) && isset($_GET['id'])){
     <table class="tasks-table" >
         <tbody>
 
-
-        <?php foreach ($tasksList->getTasks() as $key=>$task) { ?>
-            <tr>
-                <td>
-                    <input class="checked"
-                           type="checkbox" <?php echo $task['done'] ? 'checked' : ''; ?>
-                           onchange="window.location.href='/welcome/TODO/tasks_list.php?change_status&id=<?php echo $key; ?>';">
-                </td>
-                <td class="task-name"><?php echo $task['title'];?></td>
-                <td><a href="/welcome/TODO/tasks_list.php?remove_task&id=<?php echo $key; ?>"><input type="button" value="X"></a></td>
-            </tr>
-        <?php  } ?>
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <input type="checkbox" checked>-->
-<!--            </td>-->
-<!--            <td class="task-name">Пример задачи</td>-->
-<!--            <td>-->
-<!--                <a href="#"><input type="button" value="X"></a>-->
-<!--            </td>-->
-<!--        </tr>-->
+            <?php if (count($tasksList->getTasks())) {
+                foreach ($tasksList->getTasks() as $key=>$task) { ?>
+                    <tr>
+                    <td>
+                        <input class="checked"
+                               type="checkbox" <?php echo $task['done'] ? 'checked' : ''; ?>
+                               onchange="window.location.href='/welcome/TODO/tasks_list.php?change_status&id=<?php echo $key; ?>';">
+                    </td>
+                    <td class="task-name"><?php echo $task['title'];?></td>
+                    <td><a href="/welcome/TODO/tasks_list.php?remove_task&id=<?php echo $key; ?>"><input type="button" value="X"></a></td>
+                </tr>
+            <?php  } ?>
+            <?php  } else { ?>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked>
+                            </td>
+                            <td class="task-name">Список задач пуст</td>
+                            <td>
+                                <a href="#"><input type="button" value="X"></a>
+                            </td>
+                        </tr>
+            <?php  } ?>
        </tbody>
     </table>
     <form method="post" action="tasks_list.php">
