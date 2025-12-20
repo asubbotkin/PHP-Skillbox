@@ -29,7 +29,7 @@ class TasksList {
     public function changeTaskStatus($id) : void
     {
         if(isset($this->tasks[$id])){
-            $this->tasks[$id]['done'] =  ! $this->tasks[$id]['done'];
+            $this->tasks[$id]['done'] =  !$this->tasks[$id]['done'];
         }
         $this->saveList();
     }
@@ -92,6 +92,9 @@ if(isset($_GET['change_status']) && isset($_GET['id'])){
         .task-name {
             min-width: 270px;
         }
+        .checked {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -103,12 +106,15 @@ if(isset($_GET['change_status']) && isset($_GET['id'])){
 
         <?php foreach ($tasksList->getTasks() as $key=>$task) { ?>
             <tr>
-                <td><a href="/welcome/TODO/tasks_list.php?change_status&id=<?php echo $key; ?>"><input type="checkbox" <?php echo $task['done'] ? 'checked' : ''; ?>></a></td>
+                <td>
+                    <input class="checked"
+                           type="checkbox" <?php echo $task['done'] ? 'checked' : ''; ?>
+                           onchange="window.location.href='/welcome/TODO/tasks_list.php?change_status&id=<?php echo $key; ?>';">
+                </td>
                 <td class="task-name"><?php echo $task['title'];?></td>
                 <td><a href="/welcome/TODO/tasks_list.php?remove_task&id=<?php echo $key; ?>"><input type="button" value="X"></a></td>
             </tr>
         <?php  } ?>
-
 <!--        <tr>-->
 <!--            <td>-->
 <!--                <input type="checkbox" checked>-->
@@ -118,11 +124,11 @@ if(isset($_GET['change_status']) && isset($_GET['id'])){
 <!--                <a href="#"><input type="button" value="X"></a>-->
 <!--            </td>-->
 <!--        </tr>-->
-        </tbody>
+       </tbody>
     </table>
     <form method="post" action="tasks_list.php">
         <label>Добавить задачу: </label>
-        <input type="text" size="20">
+        <input type="text" size="20" name="task_name">
         <input type="submit" value="Добавить">
     </form>
 </div>
