@@ -72,7 +72,7 @@ if(isset($_GET['change_status']) && isset($_GET['id'])){
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TO DO</title>
     <style>
         .container {
             display: flex;
