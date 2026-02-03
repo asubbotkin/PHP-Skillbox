@@ -10,7 +10,7 @@ function errorHandler($level, $msg, $line, $file)
     }
 }
 
-set_exception_handler()
+//set_exception_handler()
 set_error_handler("errorHandler");
 
 $a = [];
