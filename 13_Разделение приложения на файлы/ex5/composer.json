@@ -1,0 +1,17 @@
+{
+    "name": "andrew/ex5",
+    "autoload": {
+        "psr-4": {
+            "Andrew\\Ex5\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrei Subbotkin",
+            "email": "6865152618@my.lerna.md"
+        }
+    ],
+    "require": {
+        "markbaker/matrix": "^3.0"
+    }
+}
