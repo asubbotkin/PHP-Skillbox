@@ -60,7 +60,6 @@ class UserStorage extends Storage
 
     public function deleteUser ($id) : void
     {
-        $i = intval($id);
         foreach ($this->objectsList as $index => $user)
         {
             if ($user['id'] === intval($id))
@@ -72,33 +71,35 @@ class UserStorage extends Storage
         }
     }
 
-    public function updateUser () : void
+    public function updateUser ($id) : void
     {
+        parse_str(file_get_contents('php://input'), $PUT);
         foreach ($this->objectsList as $key => $user)
-            if ($user->id === $_POST['id'])
+            if ($user['id'] === intval($id))
             {
-                $this->objectsList['key']->name = $_POST['name'];
-                $this->objectsList['key']->nickname = $_POST['nickname'];
-                $this->objectsList['key']->email = $_POST['email'];
-                $this->objectsList['key']->age = $_POST['age'];
+                if (array_key_exists('ag', $this->objectsList[$key])) unset($this->objectsList[$key]['ag']);
+                $this->objectsList[$key]['name'] = $PUT['name'] ?? $this->objectsList[$key]['name'];
+                $this->objectsList[$key]['nickname'] = $PUT['nickname'] ?? $this->objectsList[$key]['nickname'];
+                $this->objectsList[$key]['email'] = $PUT['email'] ?? $this->objectsList[$key]['email'];
+                $this->objectsList[$key]['age'] = $PUT['age'] ?? $this->objectsList[$key]['age'];
                 $this->store();
             }
     }
 
     public function getUser ($id)
     {
-        foreach ($this->objectsList as $key => $user)
-            if ($user->id === $id)
+        foreach ($this->objectsList as $index => $user)
+        {
+            if ($user['id'] === intval($id))
             {
-                return json_encode($user);
-            } else
-            {
-                return null;
+                echo json_encode($user);
+                break;
             }
+        }
     }
     public function getUsers ()
     {
-        return json_encode($this->objectsList);
+        echo json_encode($this->objectsList);
 
     }
 }
@@ -109,8 +110,8 @@ $userStorage = new UserStorage();
 
 // C  (CREATE)   - POST /user.php
 // R  (READ)     - GET  /user.php?id=1
-// U  (UPDATE)   - PATCH /user.php?id=1
-// D  (DELETE)   - DELETE /user.php?id=1
+// U  (UPDATE)   - PUT /user.php // id передается в параметрах запроса
+// D  (DELETE)   - DELETE /user.php // id передается в параметрах запроса
 // RA (READ ALL) - GET /user.php
 
 switch ($_SERVER['REQUEST_METHOD'])
