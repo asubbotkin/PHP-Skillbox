@@ -53,7 +53,7 @@ class UserStorage extends Storage
 {
     public function addUser () : void
     {
-        $user = new User($_POST['email'], $_POST['nickname'], $_POST['name'], $_POST['age']);
+        $user = new UserController($_POST['email'], $_POST['nickname'], $_POST['name'], $_POST['age']);
         $this->objectsList[] = $user;
         $this->store();
     }
